@@ -1,14 +1,13 @@
-require_relative 'event_manager'
 require 'csv'
 
 class GameData
-  
-  @@save_name = "place_holder"
-  @@secret_word = %[]
-  @@guessed_letters = %[]
+
+  attr_accessor :secret_word, :guessed_letters, :word
 
   def initialize
-
+    @@secret_word = %[]
+    @@save_name = "place_holder"
+    @@guessed_letters = %[]
   end 
 
   def word_list
@@ -19,7 +18,7 @@ class GameData
         @word_dictionary += [word]
       end 
     end 
-    secret_word = @word_dictionary.sample #HERE!!!!!!!
+    @word = @word_dictionary.sample #HERE!!!!!!!
   end 
 
   def save
