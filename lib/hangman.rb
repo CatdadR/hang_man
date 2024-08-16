@@ -4,7 +4,6 @@ class Hangman
 
   def initialize
    self.start
-   data = GameData.new
   end
 
   def start
@@ -13,9 +12,11 @@ class Hangman
     puts "2) Load a previous game"
     puts "3) Exit"
 
+    @game_data = GameData.new
+
     case gets.chomp 
     when '1' 
-      puts "started"
+      new_game
     when '2'
       puts "Loaded"
     when '3'
@@ -26,14 +27,33 @@ class Hangman
   end
 
   def new_game
-    #creates a new game
+    @game_data.word_list
+    game_instance(@game_data.word, @game_data.guessed_letters)
   end
 
   def load_game 
     #loads a previous game 
   end
 
-  def game_instance
+  def game_instance(secret_word, guessed_letters)
+    
+    @game_data.secret_word = secret_word.split("")
+    puts @game_data.secret_word
+    guessed_letters = []    
+    
+    while guessed_letters.length < 7
+      guess = gets.downcase 
+        if guessed_letters.include?(guess)
+          puts "Try another letter"
+        else
+          guessed_letters += [guess] 
+        end
+    end
+    
+
+
+
+
     #contains current game information either from a new game or loaded game 
   end
 
